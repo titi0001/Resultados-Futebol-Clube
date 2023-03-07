@@ -12,3 +12,15 @@
 
 # Configurar os comandos para iniciar a aplicação de acordo com as boas práticas
 # Dica: Leia a seção Docker e Docker-compose no README para mais informações
+
+FROM node:16.14-alpine3.15 
+
+WORKDIR /app-frontend
+
+COPY . .
+
+# ADD node_modules.tar.gz /app-frontend
+
+EXPOSE 3000
+
+ENTRYPOINT ["npm" , "start"]
