@@ -1,8 +1,8 @@
 import { BOOLEAN, INTEGER, Model } from 'sequelize';
 import db from '.';
-import TeamModel from './TeamModel';
+import Team from './TeamModel';
 
-export default class Matches extends Model {
+class Matches extends Model {
   declare readonly id: number;
   declare homeTeamId: number;
   declare homeTeamGoals: number;
@@ -21,6 +21,7 @@ Matches.init({
   homeTeamId: {
     allowNull: false,
     type: INTEGER,
+    field: 'home_team_id',
   },
   homeTeamGoals: {
     allowNull: false,
@@ -29,10 +30,11 @@ Matches.init({
   awayTeamId: {
     allowNull: false,
     type: INTEGER,
+    field: 'away_team_id',
   },
   awayTeamGoals: {
-    allowNull: false,
     type: INTEGER,
+    allowNull: false,
   },
   inProgress: {
     allowNull: false,
@@ -45,8 +47,9 @@ Matches.init({
   timestamps: false,
 });
 
-Matches.belongsTo(TeamModel, { foreignKey: 'home_team_id', as: 'homeTeam' });
-TeamModel.hasMany(Matches, { foreignKey: 'home_team_id', as: 'homeTeam' });
+Matches.belongsTo(Team, { foreignKey: 'home_team_id', as: 'homeTeam' });
+Team.hasMany(Matches, { foreignKey: 'home_team_id', as: 'homeTeam' });
+Matches.belongsTo(Team, { foreignKey: 'away_team_id', as: 'awayTeam' });
+Team.hasMany(Matches, { foreignKey: 'away_team_id', as: 'awayTeam' });
 
-Matches.belongsTo(TeamModel, { foreignKey: 'away_team_id', as: 'awayTeam' });
-TeamModel.hasMany(Matches, { foreignKey: 'away_team_id', as: 'awayTeam' });
+export default Matches;

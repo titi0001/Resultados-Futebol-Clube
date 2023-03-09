@@ -8,14 +8,14 @@ class Team extends Model {
 
 Team.init({
   id: {
-    type: INTEGER,
     allowNull: false,
     primaryKey: true,
     autoIncrement: true,
+    type: INTEGER,
   },
   teamName: {
-    type: STRING,
     allowNull: false,
+    type: STRING,
   },
 }, {
   sequelize: db,
