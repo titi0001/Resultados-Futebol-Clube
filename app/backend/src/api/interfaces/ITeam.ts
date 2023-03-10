@@ -7,8 +7,8 @@ export default interface ITeam {
 
 export interface IServiceTeam {
   create(dto: ITeam): Promise<Team>;
-  readAll(): Promise<Team>;
+  readAll(): Promise<Team[]>;
   readById(id: number):Promise<Team>;
-  update(id:string, dto: ITeam): Promise<Team>;
+  update(id:number, dto: ITeam): Promise<[number, Team[]]>;
   delete(id:string):Promise<void>;
 }
