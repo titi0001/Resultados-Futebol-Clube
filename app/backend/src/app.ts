@@ -1,10 +1,15 @@
+import 'express-async-errors';
 import * as express from 'express';
+import teamRoutes from './api/routes';
+import ErrorHandler from './api/middlewares/ErroHandler';
 
 class App {
   public app: express.Express;
 
   constructor() {
     this.app = express();
+    this.initRoutes();
+    this.initMiddlewares();
 
     this.config();
 
@@ -22,6 +27,17 @@ class App {
 
     this.app.use(express.json());
     this.app.use(accessControl);
+  }
+
+  /**
+   * Rotas do projeto Aqui
+   */
+  private initRoutes(): void {
+    this.app.use(teamRoutes);
+  }
+
+  private initMiddlewares() {
+    this.app.use(ErrorHandler.handle);
   }
 
   public start(PORT: string | number):void {
