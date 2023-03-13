@@ -2,8 +2,8 @@ import User from '../../database/models/UserModel';
 
 export default interface IUser {
   id?: number
-  username: string
-  role: string
+  username?: string
+  role?: string
   email: string
   password: string
 }
