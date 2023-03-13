@@ -1,16 +1,19 @@
 import { NextFunction, Request, Response } from 'express';
-import Joi from 'joi';
+import * as Joi from 'joi';
 
 const validateFieldsLogin = Joi.object().keys({
-  username: Joi.string().required(),
+  email: Joi.string().email().required(),
   password: Joi.string().min(6).required(),
 });
 
-export default function loginValidate(req: Request, res: Response, next: NextFunction) {
-  const { email, password } = req.body;
+export default async function loginValidate(req: Request, res: Response, next: NextFunction) {
+  const { error } = await validateFieldsLogin.validate(req.body);
 
-  if (!email || !password) {
+  if (error?.details[0].type === 'any.required') {
     return res.status(400).send({ message: 'All fields must be filled' });
+  }
+  if (error !== undefined) {
+    return res.status(401).send({ message: 'Invalid email or password' });
   }
 
   next();
