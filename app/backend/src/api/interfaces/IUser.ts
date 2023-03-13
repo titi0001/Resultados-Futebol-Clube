@@ -13,5 +13,6 @@ export interface IServiceUser {
   readAll(): Promise<User[]>;
   readById(id: number):Promise<User>;
   update(id:string, dto: IUser): Promise<[number, User[]]>;
+  findLogin(loginBody: IUser):Promise<string>
   delete(id:string):Promise<void>;
 }

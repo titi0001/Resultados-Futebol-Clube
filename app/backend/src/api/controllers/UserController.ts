@@ -9,7 +9,7 @@ export default class UserController {
   }
 
   async findUserLogin(req: Request, res: Response) {
-    const resultToken = await this._service.;
-    return res.status(200).send(resultToken);
+    const resultToken = await this._service.findLogin(req.body);
+    return res.status(200).send({ token: resultToken });
   }
 }

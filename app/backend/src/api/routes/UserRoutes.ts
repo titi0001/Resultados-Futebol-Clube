@@ -3,12 +3,14 @@ import { UserController } from '../controllers';
 import loginValidate from '../middlewares/loginValidate';
 import { UserService } from '../services';
 
-const UserRoutes = Router();
+const userRoutes = Router();
 const userService = new UserService();
 const userController = new UserController(userService);
 
-UserRoutes.post(
+userRoutes.post(
   './login',
   loginValidate,
   (req: Request, res: Response) => userController.findUserLogin(req, res),
 );
+
+export default userRoutes;

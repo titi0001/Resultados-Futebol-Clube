@@ -1,9 +1,12 @@
+import { compareSync } from 'bcryptjs';
 import { ModelStatic } from 'sequelize';
 import Users from '../../database/models/UserModel';
 import ErrorRequest from '../errors/errorRequest';
 import IUser, { IServiceUser } from '../interfaces/IUser';
+import generateToken from '../utils/generateToken';
 
 const ID_NOT_FOUND = 'ID não existe';
+const INVALID_USER_PASSWORD = 'Invalid email or password';
 
 export default class UserService implements IServiceUser {
   protected model: ModelStatic<Users> = Users;
@@ -40,11 +43,19 @@ export default class UserService implements IServiceUser {
   }
 
   async findLogin(loginBody: IUser):Promise<string> {
-    const { email } = loginBody;
+    const { email, password } = loginBody;
     const readUser = await this.model.findOne({
       where:
         { email },
     });
-    
+
+    const checkPassword = compareSync(password, '');
+
+    if (!readUser || !checkPassword) {
+      throw new ErrorRequest(INVALID_USER_PASSWORD);
+    }
+
+    const newToken = await generateToken(email, password);
+    return newToken;
   }
 }
