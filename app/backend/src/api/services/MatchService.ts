@@ -1,5 +1,6 @@
 import { ModelStatic } from 'sequelize';
 import Match from '../../database/models/MatchesModel';
+import Team from '../../database/models/TeamModel';
 import ErrorRequest from '../errors/errorRequest';
 import IMatch, { IServiceMatch } from '../interfaces/IMatch';
 
@@ -13,7 +14,11 @@ export default class MatchService implements IServiceMatch {
   }
 
   async readAll(): Promise<Match[]> {
-    return this.model.findAll();
+    return this.model.findAll({
+      include: [
+        { model: Team, as: 'homeTeam', attributes: ['teamName'] },
+        { model: Team, as: 'awayTeam', attributes: ['teamName'] },
+      ] });
   }
 
   async readById(id: number): Promise<Match> {

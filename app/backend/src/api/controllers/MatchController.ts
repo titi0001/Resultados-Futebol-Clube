@@ -1,4 +1,4 @@
-import { Response } from 'express';
+import { Request, Response } from 'express';
 import { IServiceMatch } from '../interfaces/IMatch';
 
 export default class MatchController {
