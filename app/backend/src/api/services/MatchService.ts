@@ -21,6 +21,18 @@ export default class MatchService implements IServiceMatch {
       ] });
   }
 
+  async readAllInProgress(inProgress: string): Promise<Match[]> {
+    if (inProgress === 'true') {
+      return (await this.readAll()).filter((match) => match.inProgress);
+    }
+
+    if (inProgress === 'false') {
+      return (await this.readAll()).filter((match) => !match.inProgress);
+    }
+
+    return this.readAll();
+  }
+
   async readById(id: number): Promise<Match> {
     const matchFind = await this.model.findOne({ where: { id } });
     if (!matchFind) throw new ErrorRequest(404, ID_NOT_FOUND);

@@ -8,8 +8,9 @@ export default class MatchController {
     this._service = service;
   }
 
-  async findAllMatch(_req: Request, res: Response) {
-    const resultAllMatch = await this._service.readAll();
+  async findAllMatch(req: Request, res: Response) {
+    const { inProgress } = req.query;
+    const resultAllMatch = await this._service.readAllInProgress(inProgress as string);
     return res.status(200).send(resultAllMatch);
   }
 }
