@@ -13,6 +13,6 @@ export interface IServiceMatch {
   create(dto: IMatch): Promise<Match>;
   readAll(): Promise<Match[]>;
   readById(id: number):Promise<Match>;
-  update(id:string, dto: IMatch): Promise<Match>;
+  update(id:string, dto: IMatch): Promise<[number, Match[]]>;
   delete(id:string):Promise<void>;
 }

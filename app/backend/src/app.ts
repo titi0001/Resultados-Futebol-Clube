@@ -1,6 +1,6 @@
 import 'express-async-errors';
 import * as express from 'express';
-import { TeamRoutes, UserRoutes } from './api/routes';
+import { TeamRoutes, UserRoutes, MatchRoutes } from './api/routes';
 import ErrorHandler from './api/middlewares/ErroHandler';
 
 class App {
@@ -34,6 +34,7 @@ class App {
   private initRoutes(): void {
     this.app.use(TeamRoutes);
     this.app.use(UserRoutes);
+    this.app.use(MatchRoutes);
   }
 
   private initMiddlewares() {

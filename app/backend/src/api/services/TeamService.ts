@@ -26,7 +26,7 @@ export default class TeamService implements IServiceTeam {
     const teamReadId = await this.model.findByPk(id);
     if (!teamReadId) throw new ErrorRequest(404, ID_NOT_FOUND);
 
-    const teamUpdate = this.model.update({ dto }, {
+    const teamUpdate = this.model.update({ ...dto }, {
       returning: true,
       where: { id: teamReadId },
     });
