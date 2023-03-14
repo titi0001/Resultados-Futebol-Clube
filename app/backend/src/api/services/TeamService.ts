@@ -18,13 +18,13 @@ export default class TeamService implements IServiceTeam {
 
   async readById(id: number): Promise<Team> {
     const teamFind = await this.model.findOne({ where: { id } });
-    if (!teamFind) throw new ErrorRequest(ID_NOT_FOUND);
+    if (!teamFind) throw new ErrorRequest(404, ID_NOT_FOUND);
     return teamFind;
   }
 
   async update(id: number, dto: ITeam): Promise<[number, Team[]]> {
     const teamReadId = await this.model.findByPk(id);
-    if (!teamReadId) throw new ErrorRequest(ID_NOT_FOUND);
+    if (!teamReadId) throw new ErrorRequest(404, ID_NOT_FOUND);
 
     const teamUpdate = this.model.update({ dto }, {
       returning: true,
@@ -36,6 +36,6 @@ export default class TeamService implements IServiceTeam {
 
   async delete(id: string): Promise<void> {
     const teamDelete = await this.model.destroy({ where: { id } });
-    if (!teamDelete) throw new ErrorRequest(ID_NOT_FOUND);
+    if (!teamDelete) throw new ErrorRequest(404, ID_NOT_FOUND);
   }
 }

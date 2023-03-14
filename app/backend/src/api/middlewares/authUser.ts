@@ -9,9 +9,9 @@ export default function authUser(req: Request, res: Response, next: NextFunction
   }
   try {
     const user = jwt.verify(token, process.env.JWT_SECRET as string);
-    req.body.user = user;
+    req.body.authUser = user;
     next();
   } catch (error) {
-    throw new ErrorRequest(401, 'Invalid token');
+    throw new ErrorRequest(401, 'Token must be a valid token');
   }
 }

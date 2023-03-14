@@ -6,6 +6,7 @@ import IUser, { IServiceUser } from '../interfaces/IUser';
 import generateToken from '../utils/generateToken';
 
 const ID_NOT_FOUND = 'ID não existe';
+const NAME_NOT_FOUND = 'Nome não existe';
 const INVALID_USER_PASSWORD = 'Invalid email or password';
 
 export default class UserService implements IServiceUser {
@@ -23,6 +24,12 @@ export default class UserService implements IServiceUser {
     const userFind = await this.model.findOne({ where: { id } });
     if (!userFind) throw new ErrorRequest(404, ID_NOT_FOUND);
     return userFind;
+  }
+
+  async readByEmail(email:string): Promise<Users> {
+    const userFindEmail = await this.model.findOne({ where: { email } });
+    if (!userFindEmail) throw new ErrorRequest(404, NAME_NOT_FOUND);
+    return userFindEmail;
   }
 
   async update(id: string, dto: IUser): Promise<[number, Users[]]> {
@@ -57,7 +64,7 @@ export default class UserService implements IServiceUser {
       throw new ErrorRequest(401, INVALID_USER_PASSWORD);
     }
 
-    const newToken = generateToken(email, password);
+    const newToken = generateToken(loginBody);
     return newToken;
   }
 }

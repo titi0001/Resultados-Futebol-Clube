@@ -1,5 +1,6 @@
 import { Request, Response, Router } from 'express';
 import { UserController } from '../controllers';
+import authUser from '../middlewares/authUser';
 import loginValidate from '../middlewares/loginValidate';
 import { UserService } from '../services';
 
@@ -15,7 +16,8 @@ userRoutes.post(
 
 userRoutes.get(
   '/login/role',
-  
+  authUser,
+  (req: Request, res: Response) => userController.findUser(req, res),
 );
 
 export default userRoutes;

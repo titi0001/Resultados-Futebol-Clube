@@ -1,4 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
+import ErrorRequest from '../errors/errorRequest';
 
 export default class ErrorHandler {
   public static handle(
@@ -7,10 +8,8 @@ export default class ErrorHandler {
     res: Response,
     _next: NextFunction,
 
-  ): Response {
-    if (err instanceof Error && err.stack) {
-      return res.status(parseInt(err.stack, 10)).send({ message: err.message });
-    }
-    return res.status(500).send({ message: 'Error -----' });
+  ) {
+    const { status, message } = err as ErrorRequest;
+    res.status(status).send({ message });
   }
 }
