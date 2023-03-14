@@ -13,4 +13,9 @@ userRoutes.post(
   (req: Request, res: Response) => userController.findUserLogin(req, res),
 );
 
+userRoutes.get(
+  '/login/role',
+  
+);
+
 export default userRoutes;

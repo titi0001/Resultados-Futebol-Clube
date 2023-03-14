@@ -21,13 +21,13 @@ export default class UserService implements IServiceUser {
 
   async readById(id: number): Promise<Users> {
     const userFind = await this.model.findOne({ where: { id } });
-    if (!userFind) throw new ErrorRequest(ID_NOT_FOUND);
+    if (!userFind) throw new ErrorRequest(404, ID_NOT_FOUND);
     return userFind;
   }
 
   async update(id: string, dto: IUser): Promise<[number, Users[]]> {
     const userReadId = await this.model.findByPk(id);
-    if (!userReadId) throw new ErrorRequest(ID_NOT_FOUND);
+    if (!userReadId) throw new ErrorRequest(404, ID_NOT_FOUND);
 
     const userUpdate = this.model.update({ dto }, {
       returning: true,
@@ -39,7 +39,7 @@ export default class UserService implements IServiceUser {
 
   async delete(id: string): Promise<void> {
     const userDelete = await this.model.destroy({ where: { id } });
-    if (!userDelete) throw new ErrorRequest(ID_NOT_FOUND);
+    if (!userDelete) throw new ErrorRequest(404, ID_NOT_FOUND);
   }
 
   async findLogin(loginBody: IUser):Promise<string> {
@@ -48,14 +48,13 @@ export default class UserService implements IServiceUser {
       where:
         { email },
     });
-    const checkPassword = await bcrypt.compareSync(password, readUser?.password || '-');
 
-    console.log(typeof password);
-    // console.log(readUser?.password);
-    // console.log(readUser?.email);
+    const passwordIsValid = await bcrypt.compare(password, readUser?.password || '-');
 
-    if (readUser === undefined || !checkPassword) {
-      throw new ErrorRequest(INVALID_USER_PASSWORD);
+    console.log(passwordIsValid);
+
+    if (!readUser || !passwordIsValid) {
+      throw new ErrorRequest(401, INVALID_USER_PASSWORD);
     }
 
     const newToken = generateToken(email, password);
