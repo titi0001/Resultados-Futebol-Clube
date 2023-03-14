@@ -8,7 +8,7 @@ const userService = new UserService();
 const userController = new UserController(userService);
 
 userRoutes.post(
-  './login',
+  '/login',
   loginValidate,
   (req: Request, res: Response) => userController.findUserLogin(req, res),
 );

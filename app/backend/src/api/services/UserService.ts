@@ -1,4 +1,4 @@
-import { compareSync } from 'bcryptjs';
+import * as bcrypt from 'bcryptjs';
 import { ModelStatic } from 'sequelize';
 import Users from '../../database/models/UserModel';
 import ErrorRequest from '../errors/errorRequest';
@@ -48,14 +48,17 @@ export default class UserService implements IServiceUser {
       where:
         { email },
     });
+    const checkPassword = await bcrypt.compareSync(password, readUser?.password || '-');
 
-    const checkPassword = compareSync(password, '');
+    console.log(typeof password);
+    // console.log(readUser?.password);
+    // console.log(readUser?.email);
 
-    if (!readUser || !checkPassword) {
+    if (readUser === undefined || !checkPassword) {
       throw new ErrorRequest(INVALID_USER_PASSWORD);
     }
 
-    const newToken = await generateToken(email, password);
+    const newToken = generateToken(email, password);
     return newToken;
   }
 }
