@@ -58,8 +58,6 @@ export default class UserService implements IServiceUser {
 
     const passwordIsValid = await bcrypt.compare(password, readUser?.password || '-');
 
-    console.log(passwordIsValid);
-
     if (!readUser || !passwordIsValid) {
       throw new ErrorRequest(401, INVALID_USER_PASSWORD);
     }

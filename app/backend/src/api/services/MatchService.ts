@@ -40,11 +40,11 @@ export default class MatchService implements IServiceMatch {
     return matchFind;
   }
 
-  async update(id: string, dto: IMatch): Promise<[number, Match[]]> {
+  async update(id: number, dto: IMatch): Promise<[number, Match[]]> {
     const matchReadId = await this.model.findByPk(id);
     if (!matchReadId) throw new ErrorRequest(404, ID_NOT_FOUND);
 
-    const matchUpdate = this.model.update({ ...dto }, {
+    const matchUpdate = await this.model.update({ dto }, {
       returning: true,
       where: { id: matchReadId },
     });

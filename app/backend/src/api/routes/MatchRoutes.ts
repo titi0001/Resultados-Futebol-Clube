@@ -18,4 +18,10 @@ matchRoutes.patch(
   (req: Request, res: Response) => matchController.finishMatch(req, res),
 );
 
+matchRoutes.patch(
+  '/matches/:id',
+  authUser,
+  (req: Request, res: Response) => matchController.updateMatch(req, res),
+);
+
 export default matchRoutes;

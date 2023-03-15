@@ -15,8 +15,6 @@ export default class UserController {
 
   async findUser(req: Request, res: Response) {
     const { email } = req.body.authUser;
-    console.log(req.body.authUser);
-
     const resultRole = await this._service.readByEmail(email);
     return res.status(200).send({ role: resultRole.role });
   }
