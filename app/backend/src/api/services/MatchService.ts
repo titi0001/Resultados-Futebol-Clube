@@ -19,7 +19,6 @@ export default class MatchService implements IServiceMatch {
     const resultCreate = await this.model.create(
       { homeTeamId, awayTeamId, homeTeamGoals, awayTeamGoals, inProgress: true },
     );
-    console.log(resultCreate);
 
     return resultCreate;
   }
