@@ -11,11 +11,15 @@ FROM node:16.14-alpine3.15
 
 WORKDIR /app-backend
 
-COPY . .
+COPY package* ./
 
 RUN npm install
 
+COPY . .
+
 EXPOSE 3001
 
-ENTRYPOINT ["npm" , "run", "dev"]
+ENTRYPOINT ["npm" , "run"]
+
+CMD [ "start" ]
 
