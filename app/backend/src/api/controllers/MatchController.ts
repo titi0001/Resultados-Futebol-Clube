@@ -25,4 +25,9 @@ export default class MatchController {
     const resultUpdateMatch = await this._service.update(parseInt(id, 10), req.body);
     return res.status(200).send(resultUpdateMatch);
   }
+
+  async createMatch(req:Request, res: Response) {
+    const resultCreateMatch = await this._service.create(req.body);
+    return res.status(201).send(resultCreateMatch);
+  }
 }

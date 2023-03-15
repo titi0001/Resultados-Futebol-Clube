@@ -4,13 +4,24 @@ import Team from '../../database/models/TeamModel';
 import ErrorRequest from '../errors/errorRequest';
 import IMatch, { IServiceMatch } from '../interfaces/IMatch';
 
-const ID_NOT_FOUND = 'ID não existe';
+const ID_NOT_FOUND = 'There is no team with such id!';
+const EQUAL_MATCHES_NOT_POSSIBLE = 'It is not possible to create a match with two equal teams';
 
 export default class MatchService implements IServiceMatch {
   protected model: ModelStatic<Match> = Match;
 
   async create(dto: IMatch): Promise<Match> {
-    return this.model.create({ ...dto });
+    const { homeTeamId, awayTeamId, homeTeamGoals, awayTeamGoals } = dto;
+    await this.readById(homeTeamId);
+
+    if (homeTeamId === awayTeamId) throw new ErrorRequest(422, EQUAL_MATCHES_NOT_POSSIBLE);
+
+    const resultCreate = await this.model.create(
+      { homeTeamId, awayTeamId, homeTeamGoals, awayTeamGoals, inProgress: true },
+    );
+    console.log(resultCreate);
+
+    return resultCreate;
   }
 
   async readAll(): Promise<Match[]> {
