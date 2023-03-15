@@ -58,4 +58,12 @@ export default class MatchService implements IServiceMatch {
     } });
     if (!matchDelete) throw new ErrorRequest(404, ID_NOT_FOUND);
   }
+
+  async finishMatch(id: number): Promise<string> {
+    await this.model.update(
+      { inProgress: false },
+      { where: { id } },
+    );
+    return 'Finished';
+  }
 }

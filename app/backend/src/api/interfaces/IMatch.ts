@@ -16,4 +16,5 @@ export interface IServiceMatch {
   readById(id: number):Promise<Match>;
   update(id:string, dto: IMatch): Promise<[number, Match[]]>;
   delete(id:string):Promise<void>;
+  finishMatch(id: number): Promise<string>
 }
