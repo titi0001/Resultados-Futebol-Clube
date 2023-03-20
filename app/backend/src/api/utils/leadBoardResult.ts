@@ -1,15 +1,15 @@
 import Match from '../../database/models/MatchesModel';
 import { TeamSide } from '../interfaces/ILeaderBoard';
-import resultGame from './functions';
+import { resultGame, resultGoal } from './functions';
 
 export default class leaderBoardResult {
-  static resultTotalPoints(matches: Match[], sideTeam: []): number {
+  static resultTotalPoints(matches: Match[], sideTeam: TeamSide[]): number {
     const { wins, draws } = resultGame(matches, sideTeam);
     return (wins * 3) + draws;
   }
 
-  static resultTotalGames(): number {
-
+  static resultTotalGames(matches: Match[]): number {
+    return matches.length;
   }
 
   static resultTotalWins(matches: Match[], sideTeam: TeamSide[]):number {
@@ -19,7 +19,7 @@ export default class leaderBoardResult {
 
   static resultTotalDraws(matches: Match[], sideTeam: TeamSide[]):number {
     const { draws } = resultGame(matches, sideTeam);
-    return draws;
+    return draws * 1;
   }
 
   static resultTotalLosses(matches: Match[], sideTeam: TeamSide[]):number {
@@ -27,11 +27,26 @@ export default class leaderBoardResult {
     return losses;
   }
 
-  //   resultGoalsScoredFor(): void
+  static resultGoalsOutput(matches: Match[], sideTeam: TeamSide[]) {
+    const { homeGoals } = resultGoal(matches, sideTeam);
+    return homeGoals;
+  }
 
-  //   resultGoalsConceded(): void
+  static resultGoalsInput(matches: Match[], sideTeam: TeamSide[]):number {
+    const { awayGoals } = resultGoal(matches, sideTeam);
+    return awayGoals;
+  }
 
-  //   resultTotalGoalBalance():void
+  static resultTotalGoalBalance(matches: Match[], sideTeam: TeamSide[]):number {
+    const { awayGoals, homeGoals } = resultGoal(matches, sideTeam);
+    return homeGoals - awayGoals;
+  }
 
-//   resultTeamUtilization(): void
+  static resultTeamUtilization(matches: Match[], sideTeam: TeamSide[]): number {
+    const resultPoint = leaderBoardResult.resultTotalPoints(matches, sideTeam);
+    const resultMatches = leaderBoardResult.resultTotalGames(matches);
+
+    const resultUtilization = Number(((resultPoint / resultMatches) * 100).toFixed(2));
+    return resultUtilization;
+  }
 }

@@ -1,7 +1,7 @@
 import Match from '../../database/models/MatchesModel';
 import { TeamSide } from '../interfaces/ILeaderBoard';
 
-function resultGame(matches: Match[], sideTeam: TeamSide[]) {
+export function resultGame(matches: Match[], sideTeam: TeamSide[]) {
   return matches.reduce(
     (acc, curr) => ({
       draws: acc.draws + (curr[sideTeam[0]] === curr[sideTeam[1]] ? 1 : 0),
@@ -12,4 +12,12 @@ function resultGame(matches: Match[], sideTeam: TeamSide[]) {
   );
 }
 
-export default resultGame;
+export function resultGoal(matches: Match[], sideTeam: TeamSide[]) {
+  return matches.reduce(
+    (acc, curr) => ({
+      homeGoals: acc.homeGoals + curr[sideTeam[0]],
+      awayGoals: acc.awayGoals + curr[sideTeam[1]],
+    }),
+    { homeGoals: 0, awayGoals: 0 },
+  );
+}
