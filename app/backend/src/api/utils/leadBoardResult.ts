@@ -1,35 +1,29 @@
 import Match from '../../database/models/MatchesModel';
-import { ILeaderBoardService, TeamSide } from '../interfaces/ILeaderBoard';
+import { TeamSide } from '../interfaces/ILeaderBoard';
+import resultGame from './functions';
 
-export default class leaderBoardResult implements ILeaderBoardService {
-  resultGame = (matches: Match[], sideTeam: TeamSide[]) => matches.reduce(
-    (acc, curr) => ({
-      draws: acc.draws + (curr[sideTeam[0]] === curr[sideTeam[1]] ? 1 : 0),
-      losses: acc.losses + (curr[sideTeam[0]] < curr[sideTeam[1]] ? 1 : 0),
-      wins: acc.wins + (curr[sideTeam[0]] > curr[sideTeam[1]] ? 1 : 0),
-    }),
-    { wins: 0, losses: 0, draws: 0 },
-  );
-
-  public resultTotalPoints(matches: Match[], sideTeam: TeamSide[]): number {
-    const { wins, draws } = this.resultGame(matches, sideTeam);
+export default class leaderBoardResult {
+  static resultTotalPoints(matches: Match[], sideTeam: []): number {
+    const { wins, draws } = resultGame(matches, sideTeam);
     return (wins * 3) + draws;
   }
 
-  //   resultTotalGames(): void
+  static resultTotalGames(): number {
 
-  resultTotalWins(matches: Match[], sideTeam: TeamSide[]):number {
-    const { wins } = this.resultGame(matches, sideTeam);
+  }
+
+  static resultTotalWins(matches: Match[], sideTeam: TeamSide[]):number {
+    const { wins } = resultGame(matches, sideTeam);
     return (wins * 3);
   }
 
-  resultTotalDraws(matches: Match[], sideTeam: TeamSide[]):number {
-    const { draws } = this.resultGame(matches, sideTeam);
+  static resultTotalDraws(matches: Match[], sideTeam: TeamSide[]):number {
+    const { draws } = resultGame(matches, sideTeam);
     return draws;
   }
 
-  resultTotalLosses(matches: Match[], sideTeam: TeamSide[]):number {
-    const { losses } = this.resultGame(matches, sideTeam);
+  static resultTotalLosses(matches: Match[], sideTeam: TeamSide[]):number {
+    const { losses } = resultGame(matches, sideTeam);
     return losses;
   }
 

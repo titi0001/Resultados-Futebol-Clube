@@ -12,25 +12,25 @@ export default interface ILeaderBoard {
 
 }
 
-export interface ILeaderBoardService {
-
-  resultTotalPoints(match: [], sideTeam: []): number
-
-  // resultTotalGames(): void
-
-  // resultTotalWins(): void
-
-  // resultTotalDraws(): void
-
-  // resultTotalLosses(): void
-
-  // resultGoalsScoredFor(): void
-
-  // resultGoalsConceded(): void
-
-  // resultTotalGoalBalance():void
-
-  // resultTeamUtilization(): void
-}
-
 export type TeamSide = 'homeTeamGoals' | 'awayTeamGoals';
+
+// export interface ILeaderBoardService {
+
+//   resultTotalPoints(matches: [], sideTeam: []): number
+
+//   resultTotalWins(matches: [], sideTeam: []): number
+
+//   resultTotalDraws(matches: [], sideTeam: []): number
+
+//   resultTotalLosses(matches: [], sideTeam: []): number
+
+//   // resultTotalGames(): void
+
+//   // resultGoalsScoredFor(): void
+
+//   // resultGoalsConceded(): void
+
+//   // resultTotalGoalBalance():void
+
+//   // resultTeamUtilization(): void
+// }
