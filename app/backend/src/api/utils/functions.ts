@@ -1,5 +1,5 @@
 import Match from '../../database/models/MatchesModel';
-import { TeamSide } from '../interfaces/ILeaderBoard';
+import ILeaderBoard, { TeamSide } from '../interfaces/ILeaderBoard';
 
 export function resultGame(matches: Match[], sideTeam: TeamSide[]) {
   return matches.reduce(
@@ -20,4 +20,16 @@ export function resultGoal(matches: Match[], sideTeam: TeamSide[]) {
     }),
     { homeGoals: 0, awayGoals: 0 },
   );
+}
+
+export function order(team: ILeaderBoard[]) {
+  return team.sort((a, b) => {
+    if (b.totalPoints !== a.totalPoints) return b.totalPoints - a.totalPoints;
+
+    if (a.goalsFavor - a.goalsOwn !== b.goalsFavor - b.goalsOwn) {
+      return b.goalsFavor - b.goalsOwn - a.goalsFavor + a.goalsOwn;
+    }
+
+    return b.goalsFavor - a.goalsFavor;
+  });
 }

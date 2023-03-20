@@ -9,7 +9,7 @@ export default class LeaderBoardController {
   }
 
   async findAllHome(_req: Request, res: Response) {
-    const resultAllLeaderBoard = await this._service.readAll();
+    const resultAllLeaderBoard = await this._service.readAllHome();
     return res.status(200).send(resultAllLeaderBoard);
   }
 }

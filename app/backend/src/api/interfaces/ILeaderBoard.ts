@@ -7,15 +7,16 @@ export default interface ILeaderBoard {
   totalLosses: number;
   goalsFavor: number;
   goalsOwn: number;
-  goalsBalance: number;
-  efficiency?: string;
+  goalsBalance?: number;
+  efficiency?: number;
 
 }
 
 export type TeamSide = 'homeTeamGoals' | 'awayTeamGoals';
 
 export interface IServiceLeadBoard {
-  readAll()
+
+  readAllHome():Promise<ILeaderBoard[]>
 }
 
 export interface ILeaderBoardResult {
