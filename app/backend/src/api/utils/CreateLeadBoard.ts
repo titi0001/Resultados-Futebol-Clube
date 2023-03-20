@@ -5,7 +5,7 @@ import leaderBoardResult from './leadBoardResult';
 export default function ObjLeadBoard(teamName: string, matches: Match[], sideTeam: TeamSide[]) {
   return {
     name: teamName,
-    totalPoints: leaderBoardResult.resultTotalWins(matches, sideTeam),
+    totalPoints: leaderBoardResult.resultTotalPoints(matches, sideTeam),
     totalGames: leaderBoardResult.resultTotalGames(matches),
     totalVictories: leaderBoardResult.resultTotalWins(matches, sideTeam),
     totalDraws: leaderBoardResult.resultTotalDraws(matches, sideTeam),

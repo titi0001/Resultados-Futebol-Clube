@@ -5,7 +5,7 @@ import { resultGame, resultGoal } from './functions';
 export default class leaderBoardResult {
   static resultTotalPoints(matches: Match[], sideTeam: TeamSide[]): number {
     const { wins, draws } = resultGame(matches, sideTeam);
-    return (wins * 3) + draws;
+    return wins * 3 + draws;
   }
 
   static resultTotalGames(matches: Match[]): number {
@@ -14,7 +14,7 @@ export default class leaderBoardResult {
 
   static resultTotalWins(matches: Match[], sideTeam: TeamSide[]):number {
     const { wins } = resultGame(matches, sideTeam);
-    return (wins * 3);
+    return wins;
   }
 
   static resultTotalDraws(matches: Match[], sideTeam: TeamSide[]):number {
@@ -46,7 +46,7 @@ export default class leaderBoardResult {
     const resultPoint = leaderBoardResult.resultTotalPoints(matches, sideTeam);
     const resultMatches = leaderBoardResult.resultTotalGames(matches);
 
-    const resultUtilization = Number(((resultPoint / resultMatches) * 100).toFixed(2));
+    const resultUtilization = Number(((resultPoint / (resultMatches * 3)) * 100).toFixed(2));
     return resultUtilization;
   }
 }
