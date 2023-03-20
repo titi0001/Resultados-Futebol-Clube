@@ -1,6 +1,6 @@
 import TeamRoutes from './TeamRoutes';
 import UserRoutes from './UserRoutes';
 import MatchRoutes from './MatchRoutes';
-// import LeaderBoardRoutes from './LeaderBoardRoutes';
+import LeaderBoardRoutes from './LeaderBoardRoutes';
 
-export { TeamRoutes, UserRoutes, MatchRoutes };
+export { TeamRoutes, UserRoutes, MatchRoutes, LeaderBoardRoutes };

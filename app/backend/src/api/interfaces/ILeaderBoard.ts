@@ -14,23 +14,27 @@ export default interface ILeaderBoard {
 
 export type TeamSide = 'homeTeamGoals' | 'awayTeamGoals';
 
-// export interface ILeaderBoardService {
+export interface IServiceLeadBoard {
+  readAll()
+}
 
-//   resultTotalPoints(matches: [], sideTeam: []): number
+export interface ILeaderBoardResult {
 
-//   resultTotalWins(matches: [], sideTeam: []): number
+  resultTotalGames(matches: []): number
 
-//   resultTotalDraws(matches: [], sideTeam: []): number
+  resultTotalPoints(matches: [], sideTeam: []): number
 
-//   resultTotalLosses(matches: [], sideTeam: []): number
+  resultTotalWins(matches: [], sideTeam: []): number
 
-//   // resultTotalGames(): void
+  resultTotalDraws(matches: [], sideTeam: []): number
 
-//   // resultGoalsScoredFor(): void
+  resultTotalLosses(matches: [], sideTeam: []): number
 
-//   // resultGoalsConceded(): void
+  resultGoalsOutput(matches: [], sideTeam: []): number
 
-//   // resultTotalGoalBalance():void
+  resultGoalsInput(matches: [], sideTeam: []): number
 
-//   // resultTeamUtilization(): void
-// }
+  resultTotalGoalBalance(matches: [], sideTeam: []):number
+
+  resultTeamUtilization(matches: [], sideTeam: []): number
+}
