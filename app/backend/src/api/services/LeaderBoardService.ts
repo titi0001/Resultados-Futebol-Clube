@@ -19,4 +19,15 @@ export default class LeaderBoardService implements IServiceLeadBoard {
     });
     return order(result);
   }
+
+  async readAllAway():Promise<ILeaderBoard[]> {
+    const team = await this.modelTeam.findAll();
+    const matches = await this.modelMatch.findAll({ where: { inProgress: false } });
+
+    const result : ILeaderBoard[] = team.map(({ id, teamName }) => {
+      const match = matches.filter(({ awayTeamId }) => awayTeamId === id);
+      return ObjLeadBoard(teamName, match, ['awayTeamGoals', 'homeTeamGoals']);
+    });
+    return order(result);
+  }
 }

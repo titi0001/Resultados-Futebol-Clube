@@ -11,4 +11,9 @@ leaderBoardRoutes.get(
   (req: Request, res: Response) => leaderBoardController.findAllHome(req, res),
 );
 
+leaderBoardRoutes.get(
+  '/leaderboard/away',
+  (req: Request, res: Response) => leaderBoardController.findAllAway(req, res),
+);
+
 export default leaderBoardRoutes;

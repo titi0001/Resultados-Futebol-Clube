@@ -12,4 +12,9 @@ export default class LeaderBoardController {
     const resultAllLeaderBoard = await this._service.readAllHome();
     return res.status(200).send(resultAllLeaderBoard);
   }
+
+  async findAllAway(_req: Request, res: Response) {
+    const resultAllLeaderBoard = await this._service.readAllAway();
+    return res.status(200).send(resultAllLeaderBoard);
+  }
 }

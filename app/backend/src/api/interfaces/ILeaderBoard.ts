@@ -17,25 +17,6 @@ export type TeamSide = 'homeTeamGoals' | 'awayTeamGoals';
 export interface IServiceLeadBoard {
 
   readAllHome():Promise<ILeaderBoard[]>
-}
 
-export interface ILeaderBoardResult {
-
-  resultTotalGames(matches: []): number
-
-  resultTotalPoints(matches: [], sideTeam: []): number
-
-  resultTotalWins(matches: [], sideTeam: []): number
-
-  resultTotalDraws(matches: [], sideTeam: []): number
-
-  resultTotalLosses(matches: [], sideTeam: []): number
-
-  resultGoalsOutput(matches: [], sideTeam: []): number
-
-  resultGoalsInput(matches: [], sideTeam: []): number
-
-  resultTotalGoalBalance(matches: [], sideTeam: []):number
-
-  resultTeamUtilization(matches: [], sideTeam: []): number
+  readAllAway():Promise<ILeaderBoard[]>
 }
