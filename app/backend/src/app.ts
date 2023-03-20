@@ -35,6 +35,7 @@ class App {
     this.app.use(TeamRoutes);
     this.app.use(UserRoutes);
     this.app.use(MatchRoutes);
+    // this.app.use(LeaderBoardRoutes);
   }
 
   private initMiddlewares() {
