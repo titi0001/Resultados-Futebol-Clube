@@ -2,7 +2,7 @@ import { ModelStatic } from 'sequelize';
 import Match from '../../database/models/MatchesModel';
 import Team from '../../database/models/TeamModel';
 import ILeaderBoard, { IServiceLeadBoard } from '../interfaces/ILeaderBoard';
-import ObjLeadBoard from '../utils/CreateLeadBoard';
+import ObjLeadBoard from '../utils/CreateleaderBoard';
 import { order } from '../utils/functions';
 
 export default class LeaderBoardService implements IServiceLeadBoard {

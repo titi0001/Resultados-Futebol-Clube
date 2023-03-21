@@ -19,4 +19,6 @@ export interface IServiceLeadBoard {
   readAllHome():Promise<ILeaderBoard[]>
 
   readAllAway():Promise<ILeaderBoard[]>
+
+  // readAll():Promise<ILeaderBoard[]>
 }

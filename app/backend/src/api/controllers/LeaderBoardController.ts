@@ -17,4 +17,9 @@ export default class LeaderBoardController {
     const resultAllLeaderBoard = await this._service.readAllAway();
     return res.status(200).send(resultAllLeaderBoard);
   }
+
+  async findAll(_req: Request, res: Response) {
+    await this._service.readAllAway();
+    return res.status(404).send({ message: 'em desenvolvimento' });
+  }
 }
