@@ -9,11 +9,11 @@ const validateFieldsLogin = Joi.object().keys({
 export default async function loginValidate(req: Request, res: Response, next: NextFunction) {
   const { error } = await validateFieldsLogin.validate(req.body);
 
-  if (error?.details[0].type === 'any.required' || error?.details[0].type === 'string.min') {
+  if (error?.details[0].type === 'any.required' || error?.details[0].type === 'string.empty') {
     return res.status(400).send({ message: 'All fields must be filled' });
   }
 
-  if (error?.details[0].type === 'string.email') {
+  if (error?.details[0].type === 'string.email' || error?.details[0].type === 'string.min') {
     return res.status(401).send({ message: 'Invalid email or password' });
   }
 

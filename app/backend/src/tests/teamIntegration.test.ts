@@ -14,7 +14,7 @@ describe('Teste rotas Team', () => {
 
   let chaiHttpResponse: Response;
 
-  before(async () => {
+  beforeEach(async () => {
     sinon
       .stub(Team, "findOne")
       .resolves({
@@ -23,17 +23,17 @@ describe('Teste rotas Team', () => {
       } as Team);
   });
 
-  after(()=>{
+  afterEach(()=>{
     (Team.findOne as sinon.SinonStub).restore();
   })
 
-  it('Test a rota Get se esta retornando todos os Times', async () => {
-    chaiHttpResponse = await chai
-       .request(app).get('/teams')
+  it('Teste a rota Get se esta retornando todos os Times', async () => {
+    chaiHttpResponse = await chai.request(app).get('/teams')
        expect(chaiHttpResponse.status).to.be.deep.equal(200);
   });
 
-  it.skip('Seu sub-teste', () => {
+  it('Teste a rota get se esta retornando um time pelo id', async () => {
+    chaiHttpResponse = await chai.request(app).get('/teams/1');
     expect(chaiHttpResponse.status).to.be.deep.equal(200);
   });
 });
