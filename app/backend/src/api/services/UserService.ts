@@ -2,6 +2,7 @@ import * as bcrypt from 'bcryptjs';
 import { ModelStatic } from 'sequelize';
 import Users from '../../database/models/UserModel';
 import ErrorRequest from '../errors/errorRequest';
+import { ILogin } from '../interfaces/Ilogin';
 import IUser, { IServiceUser } from '../interfaces/IUser';
 import generateToken from '../utils/generateToken';
 
@@ -49,7 +50,7 @@ export default class UserService implements IServiceUser {
     if (!userDelete) throw new ErrorRequest(404, ID_NOT_FOUND);
   }
 
-  async findLogin(loginBody: IUser):Promise<string> {
+  async findLogin(loginBody: ILogin):Promise<string> {
     const { email, password } = loginBody;
     const readUser = await this.model.findOne({
       where:
@@ -61,8 +62,8 @@ export default class UserService implements IServiceUser {
     if (!readUser || !passwordIsValid) {
       throw new ErrorRequest(401, INVALID_USER_PASSWORD);
     }
-
-    const newToken = generateToken(loginBody);
+    const { dataValues } = readUser;
+    const newToken = generateToken(dataValues);
     return newToken;
   }
 }

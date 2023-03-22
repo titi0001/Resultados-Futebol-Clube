@@ -3,12 +3,12 @@ import * as jwt from 'jsonwebtoken';
 import ErrorRequest from '../errors/errorRequest';
 
 export default function authUser(req: Request, res: Response, next: NextFunction) {
-  const { authorization: token } = req.headers;
-  if (!token) {
+  const { authorization } = req.headers;
+  if (!authorization) {
     throw new ErrorRequest(401, 'Token not found');
   }
   try {
-    const user = jwt.verify(token, process.env.JWT_SECRET as string);
+    const user = jwt.verify(authorization, process.env.JWT_SECRET as string);
     req.body.authUser = user;
     next();
   } catch (error) {
