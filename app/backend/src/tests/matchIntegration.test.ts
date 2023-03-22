@@ -57,7 +57,7 @@ let chaiHttpResponse: Response;
       });
   });
 
-  describe('teste das rotas Matches', () => {
+  describe('Teste das rota Matches', () => {
     beforeEach(sinon.restore);
 
     it('Verifica se a rota /matches retorna todas as partidas finalizadas', async () => {
