@@ -92,5 +92,12 @@ const usersMock = {
     }),
   ];
 
+  const tokenValidMock = 
+     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJBZG1pbiIsInJvbGUiOiJhZG1pbiIsImVtYWlsIjoiYWRtaW5AYWRtaW4uY29tIiwicGFzc3dvcmQiOiIkMmEkMDgkeGkuSHhrMWN6QU8wblpSLi5CMzkzdTEwYUVEMFJRMU4zUEFFWFE3SHh0TGpLUEVaQnUuUFciLCJpYXQiOjE2Nzk1MDkzNzQsImV4cCI6MTY4MDM3MzM3NH0.jjDjCN78O4SWlaXBPifUceIJUKkpCa2TGW9LZSsfHGo"
 
-  export { usersMock, userModelMock };
+     const invalidTokenValidMock = 
+     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJBZG1pbiIsInJvbGUiOiJhZG1pbiIsImVtYWlsIjoiYWRtaW5AYWRtaW4uY29tIiwicGFzc3dvcmQiOiIkMmEkMDgkeGkuSHhrMWN6QU8wblpSLi5CMzkzdTEwYUVEMFJRMU4zUEFFWFE3SHh0TGpLUEVaQnUuUFciLCJpYXQiOjE2Nzk1MDkzNzQsImV4cCI6MTY4MDM3MzM3NH0.jjDjCN78O4SWlaXBPifUceIJUKkpCa2TGW9LZSsfHG"
+
+
+
+  export { usersMock, userModelMock, tokenValidMock, invalidTokenValidMock };

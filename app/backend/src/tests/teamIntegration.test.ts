@@ -27,12 +27,12 @@ describe('Teste rotas Team', () => {
     (Team.findOne as sinon.SinonStub).restore();
   })
 
-  it('Teste a rota Get se esta retornando todos os Times', async () => {
+  it('Verifica a rota Get se esta retornando todos os Times', async () => {
     chaiHttpResponse = await chai.request(app).get('/teams')
        expect(chaiHttpResponse.status).to.be.deep.equal(200);
   });
 
-  it('Teste a rota get se esta retornando um time pelo id', async () => {
+  it('Verifica a rota get se esta retornando um time pelo id', async () => {
     chaiHttpResponse = await chai.request(app).get('/teams/1');
     expect(chaiHttpResponse.status).to.be.deep.equal(200);
   });
